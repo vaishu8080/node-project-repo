@@ -8,12 +8,12 @@ pipeline {
             }
         }
 
-        stage('Install Node.js and npm') {
+        stage('Install npm') {
             steps {
-                sh '''
-                    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-                    sudo apt-get install -y nodejs
-                '''
+                
+                    
+                  
+                sh apt install npm
             }
         }
 
