@@ -1,50 +1,21 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout SCM') {
+        stage("Checkout") {
             steps {
                 checkout scm
             }
         }
-
-        stage('Install npm') {
+        stage("Test") {
             steps {
-                sh '''
-                    sudo apt update
-                    sudo apt install -y npm
-                '''
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Run npm Test') {
-            steps {
+                sh 'sudo apt install npm'
                 sh 'npm test'
             }
         }
-
-        stage('Run npm Build') {
+        stage("Build") {
             steps {
                 sh 'npm run build'
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline execution completed.'
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed.'
         }
     }
 }
