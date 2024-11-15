@@ -8,21 +8,9 @@ pipeline {
             }
         }
 
-        stage('Check npm Installation') {
+        stage('Install Dependencies') {
             steps {
-                script {
-                    def npmInstalled = sh(script: 'command -v npm', returnStatus: true) == 0
-                    if (!npmInstalled) {
-                        echo 'npm is not installed. Attempting to install npm...'
-                        // Remove 'sudo' if running as root or adjust commands to suit agent setup
-                        sh '''
-                            apt update
-                            apt install -y npm
-                        '''
-                    } else {
-                        echo 'npm is already installed.'
-                    }
-                }
+                sh 'npm install'
             }
         }
 
